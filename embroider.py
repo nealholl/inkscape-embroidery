@@ -43,7 +43,6 @@ import PyEmb
 from PyEmb import cache
 from PyEmb import px_per_mm
 
-# sys.path.append("/usr/share/inkscape/extensions")
 
 # Configure debug output
 debug = False
@@ -1782,7 +1781,7 @@ class Embroider(inkex.Effect):
 
     def get_output_path(self):
         svg_filename = self.document.getroot().get(inkex.addNS('docname', 'sodipodi'))
-        csv_filename = svg_filename.replace('.svg', '.csv')
+        csv_filename = svg_filename.replace('.svg', '')
         output_path = os.path.join(self.options.path, csv_filename)
 
         def add_suffix(path, suffix):
@@ -1870,15 +1869,16 @@ class Embroider(inkex.Effect):
             dbg.write("finished stitches: %s\n" % time.time())
             dbg.flush()
 
-        emb = PyEmb.Embroidery(stitches, px_per_mm)
+        emb = PyEmb.Embroidery(stitches)
         if debug:
             dbg.write("finished emb: %s\n" % time.time())
             dbg.flush()
-
-        emb.export(self.get_output_path(), self.options.output_format)
-        if debug:
-            dbg.write("finished export: %s\n" % time.time())
-            dbg.flush()
+        
+        if self.options.svg2emb == "true":
+            emb.export(self.get_output_path(), self.options.output_format)
+            if debug:
+                dbg.write("finished export: %s\n" % time.time())
+                dbg.flush()
 
         if self.options.svg2emb != "true":
             new_layer = inkex.etree.SubElement(self.document.getroot(), SVG_GROUP_TAG, {})

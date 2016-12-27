@@ -231,15 +231,16 @@ class Embroidery:
         return ''.join(ret)
 
     def export(self, filename, format):
-        fp = open(filename, "wb")
 
         if format == "melco":
-            fp.write(self.export_melco())
+            with open(filename+".exp", "wb") as fp:
+                fp.write(self.export_melco())
         elif format == "csv":
-            fp.write(self.export_csv())
+            with open(filename+".csv", "wb") as fp:
+                fp.write(self.export_csv())
         elif format == "gcode":
-            fp.write(self.export_gcode())
-        fp.close()
+            with open(filename+".gst", "wb") as fp:
+                fp.write(self.export_gcode())
 
 
 class Test:

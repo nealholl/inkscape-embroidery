@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
-    <_name>svg2emb</_name>
+    <_name>Export Embroidery</_name>
     <id>serg.svg2emb</id>
     <dependency type="executable" location="extensions">embroider.py</dependency>
 <dependency type="executable" location="extensions">inkex.py</dependency>
     <param name="svg2emb" type="boolean" _gui-text="Save to CSV" gui-hidden="true">true</param>
     <param name="collapse_len_mm" type="float" min="0.0" max="10.0" _gui-text="Maximum collapse length (mm)">0.0</param>
     <param name="trim_len_mm" type="float" min="0.0" max="300.0" _gui-text="Minimum trim length (mm)">20.0</param>
-    <param name="hide_layers" type="boolean" _gui-text="Hide other layers" description="Hide all other top-level layers when the embroidery layer is generated, in order to make stitching discernable.">true</param>
+    <param name="hide_layers" type="boolean" _gui-text="Hide other layers" gui-hidden="true">false</param>
     <param name="split_path_on_jumps" type="boolean" _gui-text="Split SVG path on jumpStitch" description="If false SVG path generated as one continuous path. Splitting on trimStitches only. If true every jump or trim stitch breaks the path.">false</param>
     <param name="output_format" type="optiongroup" _gui-text="Output file format" appearance="minimal">
         <_option value="melco">Melco</_option>
