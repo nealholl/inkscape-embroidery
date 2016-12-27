@@ -5,14 +5,16 @@ import math
 import sys
 from copy import deepcopy
 
-#try:
-#    from functools import lru_cache
-#except ImportError:
-#    from backports.functools_lru_cache import lru_cache
+px_per_mm = 3.77952755913
+
+try:
+    from functools import lru_cache
+except ImportError:
+    from backports.functools_lru_cache import lru_cache
 
 # simplify use of lru_cache decorator
-#def cache(*args, **kwargs):
-#    return lru_cache(maxsize=None)(*args, **kwargs)
+def cache(*args, **kwargs):
+    return lru_cache(maxsize=None)(*args, **kwargs)
 
 class Point:
 
@@ -85,9 +87,9 @@ class Stitch(Point):
 
 class Embroidery:
 
-    def __init__(self, stitches, pixels_per_millimeter=1):
+    def __init__(self, stitches):
         self.stitches = deepcopy(stitches)
-        self.scale(1.0 / pixels_per_millimeter)
+        self.scale(1.0 / px_per_mm)
         self.scale((1, -1))
         self.translate_to_origin()
 

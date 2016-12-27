@@ -9,7 +9,7 @@ import os
 import inkex
 import simplestyle
 
-PIXELS_PER_MM = 10
+from PyEmb import px_per_mm
 
 
 class EmbroiderParams(inkex.Effect):
@@ -37,7 +37,7 @@ class EmbroiderParams(inkex.Effect):
                 value = node.attrib.pop(old, None)
                 if value:
                     if new.endswith('_mm') and value.strip():
-                        value = str(float(value) / PIXELS_PER_MM)
+                        value = str(float(value) / px_per_mm)
 
                     node.set(new, value)
 
